@@ -36,10 +36,6 @@ export default function FridgeItem() {
         justifyContent="flex-end"
         alignItems="flex-end"
         >
-            <div>
-                <h3 padding={4}>Grapes</h3>
-                <h4>Expires</h4>
-            </div>
             <Button
             id="delete-button"
             onClick={() => {handleDelete}}
