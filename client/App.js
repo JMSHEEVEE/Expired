@@ -5,7 +5,7 @@ import FridgePage from "./components/FridgePage";
 
 const App = () => (
   <div>
-    <GuestPage />
+    <FridgePage />
   </div>
 );
 
