@@ -1,14 +1,38 @@
-const express = require("express");
+const express = require('express');
 const app = express();
-const path = require("path");
+const path = require('path');
 const cors = require('cors');
+const passport = require('passport');
 const PORT = process.env.PORT || 3000;
-const apiRouters = require('./routes/api');
+const authRoute = require('./routes/authRoute')
+const userRoute = require('./routes/userRoute')
+const bodyParser = require('body-parser');
+const expressSession = require('express-session');
 
 app.use(cors());
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
-app.use('/api', apiRouters);
+app.use(expressSession({
+  secret: "google auth",
+  resave: false,
+  saveUninitialized: false,
+  })
+);
+
+require('./passport')(passport)
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/api/auth', authRoute);
+app.use('/api/users', userRoute);
+
+app.get('/logout', (req, res) => {
+    req.session = null;
+    req.logout();
+    res.redirect('/');
+});
 
 // serve files on production mode
 if (process.env.NODE_ENV !== 'development') {
