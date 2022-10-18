@@ -4,8 +4,10 @@ const path = require("path");
 const cors = require('cors');
 const PORT = process.env.PORT || 3000;
 const apiRouters = require('./routes/api');
+const cookieParser = require('cookie-parser');
 
 app.use(cors());
+app.use(cookieParser());
 app.use(express.json());
 
 app.use('/api', apiRouters);
