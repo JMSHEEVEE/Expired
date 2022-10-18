@@ -11,7 +11,7 @@ export default function FridgeItem() {
         try {
         await fetch('/fridge', {
             method: 'DELETE',
-            body: JSON.stringify({ resto_id }),
+            body: JSON.stringify({ item_id }),
             headers: {
             'Content-Type': 'application/json',
             },
