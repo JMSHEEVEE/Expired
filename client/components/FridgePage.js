@@ -1,25 +1,37 @@
 import * as React from 'react';
 import "../scss/styles.scss";
 import dayjs from 'dayjs';
-import Stack from '@mui/material/Stack';
+import FridgeDisplay from './FridgeDisplay';
 import TextField from '@mui/material/TextField';
+import Box from '@mui/material/Box';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { TimePicker } from '@mui/x-date-pickers/TimePicker';
-import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
-import { MobileDatePicker } from '@mui/x-date-pickers/MobileDatePicker';
 
-export default function FridgePage() {
-  const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
+
+const FridgePage = () => {
+
+  const [value, setValue] = React.useState(dayjs());
 
   const handleChange = (newValue) => {
     setValue(newValue);
   };
 
   return (
+    <div>
+    <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <TextField id="food-entry-text" label="Enter food item" variant="outlined" />
+    
     <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DesktopDatePicker
+          id="exp-date-picker"
           label="Enter expiration date"
           inputFormat="MM/DD/YYYY"
           value={value}
@@ -27,29 +39,10 @@ export default function FridgePage() {
           renderInput={(params) => <TextField {...params} />}
         />
     </LocalizationProvider>
+    </Box>
+    < FridgeDisplay />
+    </div>
   );
 }
-// export function MaterialUIPickers() {
-//   const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
 
-//   const handleChange = (newValue) => {
-//     setValue(newValue);
-//   };
-// };
-
-// const FridgePage = () => (
-//   <div>    
-//     Fridge Page
-//     <LocalizationProvider dateAdapter={AdapterDayjs}>
-//         <DesktopDatePicker
-//           label="Date desktop"
-//           inputFormat="MM/DD/YYYY"
-//           value={value}
-//           onChange={handleChange}
-//           renderInput={(params) => <TextField {...params} />}
-//         />
-//     </LocalizationProvider>    
-//   </div>
-// );
-
-// export default FridgePage;
+export default FridgePage;
