@@ -4,7 +4,6 @@ const path = require('path');
 const cors = require('cors');
 const passport = require('passport');
 const PORT = process.env.PORT || 3000;
-const apiRouters = require('./routes/api');
 const authRoute = require('./routes/authRoute')
 const userRoute = require('./routes/userRoute')
 const bodyParser = require('body-parser');

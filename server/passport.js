@@ -74,7 +74,7 @@ module.exports = function(passport){
     // User.findById(id.id, (err, user) => done(err, user));
     // console.log('id: ', id)
     // done(id, "hi");
-
+    console.log('id inside deseralize: ', id)
     const query = `SELECT * FROM users WHERE password = '${id.id}'`
     db.query(query, (err, user) => done(err, user));
   });
