@@ -10,6 +10,10 @@ app.use(express.json());
 
 app.use('/api', apiRouters);
 
+// app.get('/', (req, res) => {
+//   res.send('hi');
+// })
+
 // serve files on production mode
 if (process.env.NODE_ENV !== 'development') {
   app.use('/build', express.static(path.resolve(__dirname, '../build')));
