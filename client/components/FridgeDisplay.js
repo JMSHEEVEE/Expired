@@ -3,7 +3,10 @@ import Box from '@mui/material/Box';
 import FridgeItem from './FridgeItem';
 import "../scss/styles.scss";
 
-const FridgeDisplay = () => (
+export default function FridgeDisplay() { 
+
+
+  return(
     <div>
         <Box
       sx={{
@@ -15,8 +18,8 @@ const FridgeDisplay = () => (
         },
       }}
     >
+     <FridgeItem />
     </Box>
     </div>
-);
-
-export default FridgeDisplay;
+  );
+}
