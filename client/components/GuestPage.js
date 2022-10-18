@@ -8,36 +8,22 @@ const GuestPage = () => (
       <img src="https://hmp.me/dym2"></img>
     </div>
     <div className="login-button-div">
-      <Button
-        variant="contained"
-        sx={{
-          backgroundColor:"rgb(82, 139, 166)",
-          color:"black",
-          width:"200px",
-          fontWeight:"bold",
-          "&:hover": {
-            backgroundColor: "rgb(41, 46, 49)",
-            color: "white"
-          }}}
-      >
-        LOGIN
-      </Button>
-    </div>
-    <div className="signup-button-div">
-      <Button
-        variant="contained"
-        sx={{
-          backgroundColor:"rgb(82, 139, 166)",
-          color:"black",
-          width:"200px",
-          fontWeight:"bold",
-          "&:hover": {
-            backgroundColor: "rgb(41, 46, 49)",
-            color: "white"
-          }}}
-      >
-        SIGN UP
-      </Button>
+      <a href="/api/auth/google" style={{ textDecoration: 'none' }}>
+        <Button
+          variant="contained"
+          sx={{
+            backgroundColor:"rgb(82, 139, 166)",
+            color:"black",
+            width:"200px",
+            fontWeight:"bold",
+            "&:hover": {
+              backgroundColor: "rgb(41, 46, 49)",
+              color: "white"
+            }}}
+        >
+          LOGIN WITH GOOGLE
+        </Button>
+      </a>
     </div>
   </div>
 );
