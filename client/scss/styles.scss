@@ -16,3 +16,15 @@ body {
     justify-content: center;
     margin: 20px;
 }
+
+.food-item {
+    display: flex;
+    border-width: 2px;
+    border:rgb(1, 89, 136);
+    justify-content: left;
+    height: 150px;
+}
+
+.delete-button {
+    height: 10px;
+}
