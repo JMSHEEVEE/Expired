@@ -9,7 +9,7 @@ export default function FridgeItem() {
   const handleDelete = (e) => {
     (async () => {
         try {
-        await fetch('/api/', {
+        await fetch('/fridge', {
             method: 'DELETE',
             body: JSON.stringify({ resto_id }),
             headers: {
@@ -42,8 +42,7 @@ export default function FridgeItem() {
             </div>
             <Button
             id="delete-button"
-            onClick={() => {
-                alert('clicked');}}
+            onClick={() => {handleDelete}}
             >
                 x
             </Button>
