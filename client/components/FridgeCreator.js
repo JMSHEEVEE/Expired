@@ -1,6 +1,7 @@
 import * as React from 'react';
 import "../scss/styles.scss";
 import dayjs from 'dayjs';
+import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -16,8 +17,25 @@ const FridgeCreator = () => {
     setValue(newValue);
   };
 
+  const handleAddItem = (e) => {
+    (async () => {
+        try {
+        await fetch('/fridge', {
+            method: 'POST',
+            body: JSON.stringify({ user_id }),
+            headers: {
+            'Content-Type': 'application/json',
+            },
+        });
+        } catch (error) {
+        //THIS IS A STAND IN VARIABLE
+        console.log(`Error attempting to add ${ foodItem }, error`);
+        }
+    })();
+    };
+
   return (
-    <div>
+    <div className='item-creator-div'>
     <Box
       component="form"
       sx={{
@@ -27,7 +45,6 @@ const FridgeCreator = () => {
       autoComplete="off"
     >
       <TextField id="food-entry-text" label="Enter food item" variant="outlined" />
-    
     <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DesktopDatePicker
           id="exp-date-picker"
@@ -38,6 +55,20 @@ const FridgeCreator = () => {
           renderInput={(params) => <TextField {...params} />}
         />
     </LocalizationProvider>
+    <Button
+        variant="contained"
+        sx={{
+          backgroundColor:"rgb(82, 139, 166)",
+          color:"black",
+          width:"150px",
+          fontWeight:"bold",
+          "&:hover": {
+            backgroundColor: "rgb(41, 46, 49)",
+            color: "white"
+          }}}
+      >
+        ADD ITEM
+      </Button>
     </Box>
     </div>
   );

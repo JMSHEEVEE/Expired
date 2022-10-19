@@ -17,11 +17,10 @@ export default function FridgeItem() {
             },
         });
         //THIS IS A STAND IN VARIABLE
-        setDeleted({ item_id });
         console.log(`Deleted ${foodItem}`);
         } catch (error) {
         //THIS IS A STAND IN VARIABLE
-        console.log(`Error attempting to delete ${foodItem}, error`);
+        console.log(`Error attempting to delete ${ foodItem }, error`);
         }
     })();
     };
