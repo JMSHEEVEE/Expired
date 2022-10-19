@@ -17,6 +17,23 @@ const FridgeCreator = () => {
     setValue(newValue);
   };
 
+  const handleAddItem = (e) => {
+    (async () => {
+        try {
+        await fetch('/fridge', {
+            method: 'POST',
+            body: JSON.stringify({ user_id }),
+            headers: {
+            'Content-Type': 'application/json',
+            },
+        });
+        } catch (error) {
+        //THIS IS A STAND IN VARIABLE
+        console.log(`Error attempting to add ${ foodItem }, error`);
+        }
+    })();
+    };
+
   return (
     <div className='item-creator-div'>
     <Box
