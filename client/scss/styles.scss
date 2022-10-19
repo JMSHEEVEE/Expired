@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(130, 179, 206);
+    background-color: rgb(126, 171, 208);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,4 +15,21 @@ body {
     display: flex;
     justify-content: center;
     margin: 20px;
+}
+
+.food-item {
+    display: flex;
+    border-width: 2px;
+    border:rgb(1, 89, 136);
+    justify-content: left;
+    height: 150px;
+}
+
+.delete-button {
+    height: 10px;
+}
+
+.item-creator-div {
+    display: flex;
+    align-items: flex-end;
 }
