@@ -3,38 +3,35 @@ const db = require("../models/model");
 
 const controllers = {};
 
-// CREATE TABLE user_info (
-//     _id SERIAL PRIMARY KEY,
-//     username VARCHAR(50),
-//     password VARCHAR(50)
+
+// OAUTH
+// CREATE TABLE users (
+//      id SERIAL not NULL,
+//      email VARCHAR NOT NULL UNIQUE,
+//      password VARCHAR NOT NULL,
+//      firstname VARCHAR NOT NULL,
+//      lastname VARCHAR NOT NULL
 //  )
+
 
 // CREATE TABLE fridge (
-//     _id INTEGER,
-//     user_id INTEGER,
-//     food_id INTEGER,
-//     date DATE
-//  )
-
-// CREATE TABLE food (
 //     _id SERIAL PRIMARY KEY,
-//     food_item VARCHAR(50),
-//     best_buy INTEGER
-//  )
-
+//     user_id INTEGER,
+//     food VARCHAR(50),
+//     date DATE
+// )
 
 
 controllers.getFridge = async (req, res, next) => {
-    console.log(req.body);
+    console.log(req.params);
+    const { userId } = req.params;
     try {
         const queryString = `
-        SELECT fridge.*, food.*
+        SELECT fridge.*
         FROM fridge
-        JOIN food 
-        ON fridge.food_id = food._id
         WHERE user_id = $1
         `;
-        const params = [1];
+        const params = [userId];
         const result = await db.query(queryString, params);
         res.locals.data = result.rows;
         console.log("retrieved successfully")
@@ -50,9 +47,12 @@ controllers.getFridge = async (req, res, next) => {
 // should add items to the fridge
 controllers.addToFridge = async (req, res, next) => {
     try {
-        const { food_item, expiration } = req.body;
-        const query = ``; // will add the query once I have user info
-        const params = [food_item, expiration];
+        const { user_id, food, date } = req.body;
+        const query = `
+        INSERT INTO fridge (user_id, food, date)
+        VALUES ($1, $2, $3)
+        `;
+        const params = [user_id, food, date];
         await db.query(query, params);
         console.log("added successfully")
         next();
@@ -64,13 +64,15 @@ controllers.addToFridge = async (req, res, next) => {
     }
 }
 
-
 // should delete items from the fridge
 controllers.deleteFromFridge = async (req, res, next) => {
     try {
-        const { id } = req.params;
-        const queryString = ``; // will add the query once I have user info
-        await db.query(queryString, [id]);
+        const { fridgeId } = req.params;
+        const queryString = `
+        DELETE from fridge
+        WHERE _id = $1`; // will add the query once I have user info
+        const params = [fridgeId];
+        await db.query(queryString, params);
         console.log("deleted successfully")
         next();
     } catch (err) {
@@ -82,4 +84,5 @@ controllers.deleteFromFridge = async (req, res, next) => {
 };
 
 
+// CURRENT_DATE + INTERVAL '$3 day'
 module.exports = controllers;
