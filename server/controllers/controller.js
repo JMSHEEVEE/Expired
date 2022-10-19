@@ -70,7 +70,7 @@ controllers.deleteFromFridge = async (req, res, next) => {
         const { fridgeId } = req.params;
         const queryString = `
         DELETE from fridge
-        WHERE _id = $1`; // will add the query once I have user info
+        WHERE _id = $1`;
         const params = [fridgeId];
         await db.query(queryString, params);
         console.log("deleted successfully")
@@ -84,5 +84,4 @@ controllers.deleteFromFridge = async (req, res, next) => {
 };
 
 
-// CURRENT_DATE + INTERVAL '$3 day'
 module.exports = controllers;
