@@ -3,7 +3,8 @@ const db = require("../models/model");
 const userController = {};
 
 userController.createUser = async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
+
   try {
     const { firstname, lastname, email, password } = req.body;
     const query = `INSERT INTO users (email, password, firstname, lastname) VALUES ('${email}', '${password}', '${firstname}', '${lastname}')`;

@@ -16,7 +16,8 @@ module.exports = {
       publicPath: '/',
     },
     proxy: {
-      '/api':'http://localhost:3000',
+      'api/auth/google': 'http://localhost:3000',
+      '/api': 'http://localhost:3000'
     },
     compress: false,
     host: 'localhost',

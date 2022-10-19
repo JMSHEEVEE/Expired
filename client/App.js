@@ -1,13 +1,18 @@
 import * as React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import GuestPage from "./components/GuestPage";
-import MainPage from "./components/MainPage";
 import FridgeCreator from "./components/FridgePage";
 import FridgePage from "./components/FridgePage";
 
 const App = () => (
-  <div>
-    <FridgePage />
-  </div>
+  <React.Fragment>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<GuestPage />} />
+        <Route path='/fridge' element={<FridgePage />} />
+      </Routes>
+    </BrowserRouter>
+  </React.Fragment>
 );
 
 export default App;

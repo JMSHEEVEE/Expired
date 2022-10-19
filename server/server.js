@@ -6,32 +6,37 @@ const passport = require('passport');
 const PORT = process.env.PORT || 3000;
 const authRoute = require('./routes/authRoute')
 const userRoute = require('./routes/userRoute')
+const apiRoute = require('./routes/api')
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const expressSession = require('express-session');
 
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 app.use(expressSession({
   secret: "google auth",
   resave: false,
   saveUninitialized: false,
-  })
+})
 );
 
 require('./passport')(passport)
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/api', apiRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/users', userRoute);
 
+
 app.get('/logout', (req, res) => {
-    req.session = null;
-    req.logout();
-    res.redirect('/');
+  req.session = null;
+  req.logout();
+  res.redirect('/');
 });
 
 // app.get('/', (req, res) => {

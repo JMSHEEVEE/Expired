@@ -3,7 +3,7 @@ const controllers = require('../controllers/controller');
 const router = express.Router();
 
 
-router.get('/fridge/:userId', controllers.getFridge, (req, res) => {
+router.get('/fridge', controllers.getFridge, (req, res) => {
     return res.status(200).send(res.locals.data);
 });
 

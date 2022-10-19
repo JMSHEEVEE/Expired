@@ -18,22 +18,23 @@ const controllers = {};
 //     _id SERIAL PRIMARY KEY,
 //     user_id INTEGER,
 //     food VARCHAR(50),
-//     date DATE
+//     date VARCHAR(50)
 // )
 
 
 controllers.getFridge = async (req, res, next) => {
-    console.log(req.params);
-    const { userId } = req.params;
+    console.log(req.body);
+    const { userID } = req.body;
     try {
         const queryString = `
         SELECT fridge.*
         FROM fridge
         WHERE user_id = $1
         `;
-        const params = [userId];
+        const params = [userID];
         const result = await db.query(queryString, params);
         res.locals.data = result.rows;
+        console.log(result)
         console.log("retrieved successfully")
         next();
     } catch (err) {
@@ -46,13 +47,15 @@ controllers.getFridge = async (req, res, next) => {
 
 // should add items to the fridge
 controllers.addToFridge = async (req, res, next) => {
+    console.log('In the Add to Fridge controller')
     try {
-        const { user_id, food, date } = req.body;
+        const { userID, foodItem, expDate } = req.body;
         const query = `
         INSERT INTO fridge (user_id, food, date)
         VALUES ($1, $2, $3)
         `;
-        const params = [user_id, food, date];
+        // const user_id = userID;
+        const params = [userID, foodItem, expDate];
         await db.query(query, params);
         console.log("added successfully")
         next();

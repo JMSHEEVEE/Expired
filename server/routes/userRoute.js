@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 
 router.post('/login', userController.verifyUser, (req, res) => {
+    console.log('sent to frontEnd', res.locals.user)
     res.status(200).json(res.locals.user);
 })
 
